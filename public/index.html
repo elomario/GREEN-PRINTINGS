@@ -7,18 +7,27 @@ and open the template in the editor.
 <html>
     <head>
         <title>Green Printings</title>
-		        <meta charset="UTF-8">
-				 
+		 <script src="js/jquery-1.11.1.min.js"></script>
+		 
+		 
+			
+		<script src="js/open_file.js"></script>	
+		
 	</head>
 	<body>
 		Authentication
 		<br>
 		Open File:
-		<script src="js/open_file.js"></script>
-		<script src="js/read_attributes.js"></script>
-		<input type="file" id="file-input" accept=".pdf,.doc,.txt"/>
-		<h3>Contents of the file:</h3>
-		<pre id="file-content"></pre>
+		
+		<input type="file" id="file-input" value="filename"/>
+		
+		<h3>Attributes of the file:</h3>
+		Name: <div class="name"></div>
 		<br>
+		Type: <div class="type"></div>
+		<br>
+		Size: <div class="size"></div>
+		<br>
+		
 	</body>
 </html>
