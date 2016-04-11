@@ -1,33 +1,35 @@
-http = require('http');
-fs = require('fs');
-server = http.createServer( function(req, res) {
+var express = require('express');    //Express Web Server 
+var busboy = require('connect-busboy'); //middleware for form/file upload
+var path = require('path');     //used for file path
+var fs = require('fs-extra');       //File System - for file manipulation
 
-    console.dir(req.param);
+var app = express();
+app.use(busboy());
+app.use(express.static(path.join(__dirname, 'public')));
 
-    if (req.method == 'POST') {
-        console.log("POST");
-		console.log(req);
-		 var destinationFile = fs.createWriteStream("public/static/bla.txt");
-		 var a = req.pipe(destinationFile);
-		/// console.log(a);
-		 
-		req.on('end',function(){
-		 var html = fs.readFileSync('public/index.html');
-        res.end(html);
-		 });
-    }
-    else
-    {
-        console.log("GET");
-        //var html = '<html><body><form method="post" action="http://localhost:8002">Name: <input type="text" name="name" /><input type="submit" value="Submit" /></form></body>';
-        var html = fs.readFileSync('public/index.html');
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.end(html);
-    }
+/* ========================================================== 
+Create a Route (/upload) to handle the Form submission 
+(handle POST requests to /upload)
+Express v4  Route definition
+============================================================ */
+app.route('/upload')
+    .post(function (req, res, next) {
 
+        var fstream;
+        req.pipe(req.busboy);
+        req.busboy.on('file', function (fieldname, file, filename) {
+            console.log("Uploading: " + filename);
+        
+            //Path where image will be uploaded
+            fstream = fs.createWriteStream(__dirname + '/files/' + filename);
+            file.pipe(fstream);
+            fstream.on('close', function () {    
+                console.log("Upload Finished of " + filename);              
+                res.redirect('back');           //where to go next
+            });
+        });
+    });
+
+var server = app.listen(8002, function() {
+    console.log('Listening on port %d', server.address().port);
 });
-
-port = 8002;
-host = '127.0.0.1';
-server.listen(port, host);
-console.log('Listening at http://' + host + ':' + port);
