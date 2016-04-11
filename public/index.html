@@ -19,17 +19,14 @@ and open the template in the editor.
 
 		function Upload()
 		{
-
-		var filename = document.getElementById("file-input").value;
-
-		var storepath = "http://127.0.0.1:8002/public/static/";
-
+			var filename = document.getElementById("file-input").value;
+			var storepath = "http://127.0.0.1:8002/files/";
 		}
 		</script>
-		<form action="" method="post" enctype="multipart/form-data">
-		<input type="file" id="file-input" value="filename"/>
+		<form action="upload" method="post" enctype="multipart/form-data">
+		<input type="file" id="file-input" name="displayImage"/>
 		
-		<input type="submit" value="Upload" onclick="Upload" />
+		<input type="submit" value="Upload"/>
 		</form>
 		
 		<h3>Attributes of the file:</h3>
