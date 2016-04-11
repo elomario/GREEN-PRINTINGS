@@ -7,10 +7,7 @@ and open the template in the editor.
 <html>
     <head>
         <title>Green Printings</title>
-		 <script src="js/jquery-1.11.1.min.js"></script>
-		 
-		 
-			
+		<script src="js/jquery-1.11.1.min.js"></script>
 		<script src="js/open_file.js"></script>	
 		
 	</head>
@@ -18,8 +15,22 @@ and open the template in the editor.
 		Authentication
 		<br>
 		Open File:
-		
+		<script type="text/javascript">
+
+		function Upload()
+		{
+
+		var filename = document.getElementById("file-input").value;
+
+		var storepath = "http://127.0.0.1:8002/public/static/";
+
+		}
+		</script>
+		<form action="" method="post" enctype="multipart/form-data">
 		<input type="file" id="file-input" value="filename"/>
+		
+		<input type="submit" value="Upload" onclick="Upload" />
+		</form>
 		
 		<h3>Attributes of the file:</h3>
 		Name: <div class="name"></div>
@@ -30,6 +41,5 @@ and open the template in the editor.
 		<br>
 		Pages: <div class="pages"></div>
 		<br>
-		
 	</body>
 </html>

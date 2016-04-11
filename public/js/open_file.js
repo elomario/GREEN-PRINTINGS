@@ -10,15 +10,20 @@ $(document).ready(function(){
 		$('.type').html(file.type);
 		$('.name').html(file.name);
 		$('.size').html(file.size);
-            console.log(file.name + file.type + ' (' + file.size + ').');
+		var name = file.name;
+		console.log(file.name + file.type + ' (' + file.size + ').');
+		
+		console.log("file uploaded?")
+		
 		
 		PDFJS.getDocument('http://localhost:8002/public/static/gm.pdf').then(function (doc) {
 			var numPages = doc.numPages;
-			console.log('# Document Loaded');
 			console.log('Number of Pages: ' + numPages);
 			$('.pages').html(numPages);
 		})
 		
         return false;
     });
+	
+	
 });
