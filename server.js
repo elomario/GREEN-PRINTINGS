@@ -6,10 +6,10 @@ server = http.createServer( function(req, res) {
 
     if (req.method == 'POST') {
         console.log("POST");
-
+		console.log(req);
 		 var destinationFile = fs.createWriteStream("public/static/bla.txt");
 		 var a = req.pipe(destinationFile);
-		 console.log(a);
+		/// console.log(a);
 		 
 		req.on('end',function(){
 		 var html = fs.readFileSync('public/index.html');
